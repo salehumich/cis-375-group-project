@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Support Ticket Triage
 
-## Getting Started
+A web app for solo founders who handle customer support through Gmail. Users connect their Gmail account, and the app classifies incoming emails, flags urgent ones with an AI summary, and drafts suggested replies from the founder's FAQ.
 
-First, run the development server:
+CIS 375, Group D. Live deployment: https://cis-375-group-project.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+TypeScript, Next.js (App Router) with Tailwind CSS, Supabase (Postgres, Auth, Row Level Security), Gmail API (`googleapis`), OpenAI API, Vitest and Playwright for tests, GitHub Actions for CI, Vercel for deployment.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install these first and check each with the version command.
 
-## Learn More
+| Tool | Where to get it | Check |
+|---|---|---|
+| Git | https://git-scm.com/downloads | `git --version` |
+| Node.js (current LTS) | https://nodejs.org | `node --version` and `npm --version` |
+| A code editor (we use VS Code) | https://code.visualstudio.com | |
 
-To learn more about Next.js, take a look at the following resources:
+You also need a GitHub account with access to this repository.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository and move into it:
 
-## Deploy on Vercel
+   ```bash
+   git clone https://github.com/salehumich/cis-375-group-project.git
+   cd cis-375-group-project
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Install dependencies:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npm install
+   ```
+
+   Warnings about deprecated packages are normal. Red errors are not.
+
+3. Create your local environment file by copying the template:
+
+   ```bash
+   # macOS / Linux / Git Bash
+   cp .env.example .env.local
+
+   # Windows PowerShell
+   Copy-Item .env.example .env.local
+   ```
+
+4. Fill in the values in `.env.local`. The team lead will give you the values privately. **Never paste them into the repo, a pull request, an issue, or a shared document.**
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   Open http://localhost:3000. If the page loads, setup is done. Press `Ctrl+C` in the terminal to stop the server.
+
+## Useful commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build the app for production |
+| `npm run lint` | Check code style and common mistakes |
+| `npm test` | Run unit tests (Vitest) |
+| `npm run test:e2e` | Run end-to-end tests (Playwright). On first use, run `npx playwright install` to download the test browsers |
+
+Run `npm run lint` and `npm test` before opening a pull request.
+
+## Project layout
+
+| Path | Contents |
+|---|---|
+| `app/` | Pages and API routes (Next.js App Router) |
+| `lib/` | Shared server-side code, such as Gmail helpers |
+| `types/` | Shared TypeScript types used across the team |
+| `tests/` | Unit tests (Vitest) |
+| `e2e/` | End-to-end tests (Playwright) |
+| `.env.example` | Template listing the environment variables the app needs |
+
+## Team
+
+Group D: Robert Floros (team lead, foundation and integration), Jacob Oyer (Gmail integration), Matthew Filiposki (frontend), Mohmed Saleh (AI pipeline).
